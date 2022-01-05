@@ -11,8 +11,10 @@ function carClass() {
   this.y = 175;
   this.angle = 0;
   this.speed = 0;
+  this.image;
 
-  this.reset = function () {
+  this.reset = function (image) {
+    this.image = image;
     for (let row = 0; row < TRACK_ROWS; row++) {
       for (let col = 0; col < TRACK_COLS; col++) {
         const index = colRowToIndex(col, row);
@@ -53,6 +55,6 @@ function carClass() {
   };
 
   this.draw = function () {
-    drawBitMapCenteredWithRotation(carPic, this.x, this.y, this.angle);
+    drawBitMapCenteredWithRotation(this.image, this.x, this.y, this.angle);
   };
 }

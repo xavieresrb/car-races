@@ -17,8 +17,8 @@ function launchGame() {
 
   setupInput();
 
-  blueCar.reset();
-  greenCar.reset();
+  blueCar.reset(carPic);
+  greenCar.reset(extraCarPic);
 }
 
 function moveAll() {

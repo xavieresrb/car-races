@@ -1,4 +1,5 @@
 const carPic = document.createElement('img');
+const extraCarPic = document.createElement('img');
 
 const trackPics = [];
 
@@ -16,6 +17,10 @@ const IMAGES_LIST = [
   {
     varName: carPic,
     fileName: 'player1car.png',
+  },
+  {
+    varName: extraCarPic,
+    fileName: 'player2car.png',
   },
   {
     trackType: TRACK.ROAD,
