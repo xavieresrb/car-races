@@ -12,6 +12,7 @@ function carClass() {
   this.angle = 0;
   this.speed = 0;
   this.image;
+  this.name = 'Untitled car';
 
   this.keyHeld = {
     gas: false,
@@ -29,8 +30,9 @@ function carClass() {
     };
   };
 
-  this.reset = function (image) {
+  this.reset = function (image, carName) {
     this.image = image;
+    this.name = carName;
     for (let row = 0; row < TRACK_ROWS; row++) {
       for (let col = 0; col < TRACK_COLS; col++) {
         const index = colRowToIndex(col, row);

@@ -3,15 +3,6 @@ const extraCarPic = document.createElement('img');
 
 const trackPics = [];
 
-const TRACK = {
-  ROAD: 0,
-  WALL: 1,
-  PLAYER_START: 2,
-  GOAL: 3,
-  TREE: 4,
-  FLAG: 5,
-};
-
 const IMAGES_FOLDER = 'images';
 const IMAGES_LIST = [
   {
