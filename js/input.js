@@ -5,52 +5,61 @@ const KEYS = {
     RIGHT: 39,
     DOWN: 40,
   },
-};
-
-const keyHeld = {
-  gas: false,
-  reverse: false,
-  turnLeft: false,
-  turnRight: false,
+  WASD: {
+    W: 87,
+    A: 65,
+    S: 83,
+    D: 68,
+  },
 };
 
 let mouseX = 0;
 let mouseY = 0;
 
-function keyPressed(event) {
-  if (event.keyCode === KEYS.ARROWS.LEFT) {
-    keyHeld.turnLeft = true;
+function keySet(event, car, setTo) {
+  if (event.keyCode === car.keyControl.left) {
+    car.keyHeld.turnLeft = setTo;
   }
-  if (event.keyCode === KEYS.ARROWS.RIGHT) {
-    keyHeld.turnRight = true;
+  if (event.keyCode === car.keyControl.right) {
+    car.keyHeld.turnRight = setTo;
   }
-  if (event.keyCode === KEYS.ARROWS.UP) {
-    keyHeld.gas = true;
+  if (event.keyCode === car.keyControl.up) {
+    car.keyHeld.gas = setTo;
   }
-  if (event.keyCode === KEYS.ARROWS.DOWN) {
-    keyHeld.reverse = true;
+  if (event.keyCode === car.keyControl.down) {
+    car.keyHeld.reverse = setTo;
   }
 }
 
+function keyPressed(event) {
+  console.log('key pressed', event.keyCode);
+  keySet(event, blueCar, true);
+  keySet(event, greenCar, true);
+}
+
 function keyReleased(event) {
-  if (event.keyCode === KEYS.ARROWS.LEFT) {
-    keyHeld.turnLeft = false;
-  }
-  if (event.keyCode === KEYS.ARROWS.RIGHT) {
-    keyHeld.turnRight = false;
-  }
-  if (event.keyCode === KEYS.ARROWS.UP) {
-    keyHeld.gas = false;
-  }
-  if (event.keyCode === KEYS.ARROWS.DOWN) {
-    keyHeld.reverse = false;
-  }
+  keySet(event, blueCar, false);
+  keySet(event, greenCar, false);
 }
 
 function setupInput() {
   canvas.addEventListener('mousemove', updateMousePos);
   document.addEventListener('keydown', keyPressed);
   document.addEventListener('keyup', keyReleased);
+
+  greenCar.setupInput({
+    up: KEYS.ARROWS.UP,
+    right: KEYS.ARROWS.RIGHT,
+    down: KEYS.ARROWS.DOWN,
+    left: KEYS.ARROWS.LEFT,
+  });
+
+  blueCar.setupInput({
+    up: KEYS.WASD.W,
+    right: KEYS.WASD.D,
+    down: KEYS.WASD.S,
+    left: KEYS.WASD.A,
+  });
 }
 
 function updateMousePos(evt) {

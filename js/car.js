@@ -13,6 +13,22 @@ function carClass() {
   this.speed = 0;
   this.image;
 
+  this.keyHeld = {
+    gas: false,
+    reverse: false,
+    turnLeft: false,
+    turnRight: false,
+  };
+
+  this.setupInput = function ({ up, right, down, left }) {
+    this.keyControl = {
+      up,
+      right,
+      down,
+      left,
+    };
+  };
+
   this.reset = function (image) {
     this.image = image;
     for (let row = 0; row < TRACK_ROWS; row++) {
@@ -33,17 +49,17 @@ function carClass() {
   this.move = function () {
     this.speed *= GROUND_SPEED_DECAY_MULT;
 
-    if (keyHeld.gas) {
+    if (this.keyHeld.gas) {
       this.speed += DRIVE_POWER;
     }
-    if (keyHeld.reverse) {
+    if (this.keyHeld.reverse) {
       this.speed -= REVERSE_POWER;
     }
     if (Math.abs(this.speed) > MIN_SPEED_TO_TURN) {
-      if (keyHeld.turnLeft) {
+      if (this.keyHeld.turnLeft) {
         this.angle -= TURN_RATE;
       }
-      if (keyHeld.turnRight) {
+      if (this.keyHeld.turnRight) {
         this.angle += TURN_RATE;
       }
     }
