@@ -2,6 +2,9 @@ const FRAMES_PER_SECOND = 30;
 
 let canvas, canvasContext;
 
+let blueCar = new carClass();
+let greenCar = new carClass();
+
 window.onload = function () {
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
@@ -14,12 +17,13 @@ function launchGame() {
 
   setupInput();
 
-  carReset();
+  blueCar.reset();
+  greenCar.reset();
 }
 
 function moveAll() {
-  carMove();
-  carTrackHandler();
+  blueCar.move();
+  greenCar.move();
 }
 
 function logData() {
@@ -36,7 +40,8 @@ function logData() {
 
 function drawAll() {
   drawTracks();
-  drawCar();
+  blueCar.draw();
+  greenCar.draw();
   logData();
 }
 
