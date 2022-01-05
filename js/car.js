@@ -33,6 +33,8 @@ function carClass() {
   this.reset = function (image, carName) {
     this.image = image;
     this.name = carName;
+    this.speed = 0;
+    this.angle = -Math.PI / 2;
     for (let row = 0; row < TRACK_ROWS; row++) {
       for (let col = 0; col < TRACK_COLS; col++) {
         const index = colRowToIndex(col, row);
@@ -46,6 +48,7 @@ function carClass() {
         }
       }
     }
+    console.log('Warning: no player start found!');
   };
 
   this.move = function () {

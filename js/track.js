@@ -14,14 +14,14 @@ const TRACK_ROWS = 15;
 const TRACK_GAP = 2;
 
 // prettier-ignore
-const trackGrid = [
+const LEVEL_ONE = [
         4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4,
         4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
         4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1,
         1, 0, 0, 0, 1, 1, 1, 1, 4, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 1,
         1, 0, 0, 1, 1, 0, 0, 1, 1, 4, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1,
-        1, 3, 3, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+        1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1,
         1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1,
         1, 0, 0, 1, 0, 0, 5, 0, 0, 0, 1, 0, 0, 5, 0, 0, 1, 0, 0, 1,
         1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 5, 0, 0, 1, 0, 0, 1, 0, 0, 1,
@@ -31,6 +31,8 @@ const trackGrid = [
         0, 3, 0, 0, 0, 0, 1, 4, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
         4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 4
       ];
+
+let trackGrid;
 
 function colRowToIndex(col, row) {
   return TRACK_COLS * row + col;
@@ -66,6 +68,7 @@ function carTrackHandler(car) {
     const tileHere = getTileTypeAtColRow(carTrackCol, carTrackRow);
     if (tileHere === TRACK.GOAL) {
       console.log(`${car.name} has WOOOOOOON!!!`);
+      loadLevel(LEVEL_ONE);
     } else if (tileHere !== TRACK.ROAD) {
       car.x = car.x - Math.cos(car.angle) * car.speed;
       car.y = car.y - Math.sin(car.angle) * car.speed;

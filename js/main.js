@@ -17,6 +17,12 @@ function launchGame() {
 
   setupInput();
 
+  loadLevel(LEVEL_ONE);
+}
+
+function loadLevel(levelMap) {
+  trackGrid = [...levelMap];
+
   blueCar.reset(carPic, 'Blue car');
   greenCar.reset(extraCarPic, 'Green car');
 }
