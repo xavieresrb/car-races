@@ -1,9 +1,15 @@
 const carPic = document.createElement('img');
-const roadPic = document.createElement('img');
-const wallPic = document.createElement('img');
-const goalPic = document.createElement('img');
-const treePic = document.createElement('img');
-const flagPic = document.createElement('img');
+
+const trackPics = [];
+
+const TRACK = {
+  ROAD: 0,
+  WALL: 1,
+  PLAYER_START: 2,
+  GOAL: 3,
+  TREE: 4,
+  FLAG: 5,
+};
 
 const IMAGES_FOLDER = 'images';
 const IMAGES_LIST = [
@@ -12,23 +18,23 @@ const IMAGES_LIST = [
     fileName: 'player1car.png',
   },
   {
-    varName: roadPic,
+    trackType: TRACK.ROAD,
     fileName: 'track_road.png',
   },
   {
-    varName: wallPic,
+    trackType: TRACK.WALL,
     fileName: 'track_wall.png',
   },
   {
-    varName: goalPic,
+    trackType: TRACK.GOAL,
     fileName: 'track_goal.png',
   },
   {
-    varName: treePic,
+    trackType: TRACK.TREE,
     fileName: 'track_tree.png',
   },
   {
-    varName: flagPic,
+    trackType: TRACK.FLAG,
     fileName: 'track_flag.png',
   },
 ];
@@ -49,5 +55,16 @@ function loadImages() {
     image.src = `${IMAGES_FOLDER}/${fileName}`;
   }
 
-  IMAGES_LIST.forEach((img) => setImage(img.varName, img.fileName));
+  function setTrackImage(trackType, fileName) {
+    trackPics[trackType] = document.createElement('img');
+    setImage(trackPics[trackType], fileName);
+  }
+
+  IMAGES_LIST.forEach((img) => {
+    if (img.varName) {
+      setImage(img.varName, img.fileName);
+    } else {
+      setTrackImage(img.trackType, img.fileName);
+    }
+  });
 }

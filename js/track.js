@@ -4,23 +4,6 @@ const TRACK_COLS = 20;
 const TRACK_ROWS = 15;
 const TRACK_GAP = 2;
 
-const TRACK = {
-  ROAD: 0,
-  WALL: 1,
-  PLAYER_START: 2,
-  GOAL: 3,
-  TREE: 4,
-  FLAG: 5,
-};
-
-const TRACK_TO_IMAGE = {
-  [TRACK.ROAD]: roadPic,
-  [TRACK.WALL]: wallPic,
-  [TRACK.GOAL]: goalPic,
-  [TRACK.TREE]: treePic,
-  [TRACK.FLAG]: flagPic,
-};
-
 // prettier-ignore
 const trackGrid = [
         4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4,
@@ -78,15 +61,20 @@ function carTrackHandler() {
 }
 
 function drawTracks() {
+  let index = 0;
+  let drawTileX = 0;
+  let drawTileY = 0;
+
   for (let row = 0; row < TRACK_ROWS; row++) {
     for (let col = 0; col < TRACK_COLS; col++) {
-      const index = colRowToIndex(col, row);
       const tileType = trackGrid[index];
-      const imgCandidate = TRACK_TO_IMAGE[tileType];
+      const imgCandidate = trackPics[tileType];
 
-      if (imgCandidate) {
-        canvasContext.drawImage(imgCandidate, TRACK_W * col, TRACK_H * row);
-      }
+      canvasContext.drawImage(imgCandidate, drawTileX, drawTileY);
+      drawTileX = drawTileX + TRACK_W;
+      index = index + 1;
     }
+    drawTileX = 0;
+    drawTileY = drawTileY + TRACK_H;
   }
 }
